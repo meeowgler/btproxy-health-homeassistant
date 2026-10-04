@@ -1,0 +1,21 @@
+{
+  "domain": "btproxy_health",
+  "name": "Bluetooth Proxy Health",
+  "after_dependencies": [
+    "esphome"
+  ],
+  "codeowners": [
+    "@meeowgler"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth"
+  ],
+  "documentation": "https://github.com/meeowgler/btproxy-health-homeassistant",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/meeowgler/btproxy-health-homeassistant/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "0.2.0"
+}

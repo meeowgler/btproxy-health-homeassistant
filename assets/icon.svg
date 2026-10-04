@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Source for custom_components/btproxy_health/brand/icon*.png: broadcast arcs (a proxy) around a pulse (its health). -->
+  <g fill="none" stroke="#1E88E5" stroke-width="42" stroke-linecap="round">
+    <path d="M159.8 352.2 A136 136 0 0 1 159.8 159.8"/>
+    <path d="M352.2 159.8 A136 136 0 0 1 352.2 352.2"/>
+    <path d="M96.9 415.1 A225 225 0 0 1 96.9 96.9"/>
+    <path d="M415.1 96.9 A225 225 0 0 1 415.1 415.1"/>
+  </g>
+  <polyline points="180,256 210,256 228,216 252,328 280,154 302,256 332,256"
+            fill="none" stroke="#43A047" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

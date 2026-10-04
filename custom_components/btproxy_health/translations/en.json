@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Bluetooth Proxy Health",
+        "description": "Adds liveness sensors to every ESPHome Bluetooth proxy, read from the Bluetooth integration's own scanner data."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "last_advertisement": { "name": "Last advertisement" },
+      "connection_failures_1h": { "name": "Connection failures (1 h)" },
+      "connections_1h": { "name": "Connections (1 h)" },
+      "connections_in_progress": { "name": "Connections in progress" },
+      "devices_heard": { "name": "Devices heard" }
+    }
+  }
+}
