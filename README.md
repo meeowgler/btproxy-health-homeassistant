@@ -32,7 +32,7 @@ Five diagnostic sensors on **each proxy's existing device**. It creates no new d
 
 - Values update every 60 seconds.
 - The hourly counts carry `window_complete: false` for the first hour after Home Assistant starts.
-- **A disconnected proxy's sensors go `unavailable` instead of disappearing.** The list of proxies comes from the Bluetooth integration's per-scanner config entries, which survive a disconnect. Proxies added later get sensors automatically.
+- **A disconnected proxy's sensors go `unavailable` instead of disappearing.** The list of proxies comes from the Bluetooth integration's per-scanner config entries, which survive a disconnect. Proxies added later get sensors automatically, and a proxy you replace or retire (its Bluetooth entry deleted) loses them.
 - Every remote scanner is covered (ESPHome, Shelly and other proxies). Local USB/UART adapters are not proxies and are skipped.
 - ESPHome proxies keep their existing entity-ID prefix, which is taken from the restart button. For example, a proxy with `button.esp32_bluetooth_proxy_a1b2c3_restart` gets `sensor.esp32_bluetooth_proxy_a1b2c3_last_advertisement`. Other proxies get Home Assistant's default IDs.
 

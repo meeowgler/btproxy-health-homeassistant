@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 - 2026-10-06
+
+- A proxy whose Bluetooth entry is deleted (replaced or retired) now loses its sensors, at the
+  next poll or at startup. Previously they stayed behind, unavailable and without a device, and
+  a fleet alert would report them offline. A proxy that is only disconnected keeps its sensors.
+
 ## 0.2.0 - 2026-10-04
 
 - Watches every remote Bluetooth scanner (ESPHome, Shelly, ...), not only ESPHome.

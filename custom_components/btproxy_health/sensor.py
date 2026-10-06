@@ -93,14 +93,21 @@ async def async_setup_entry(
     entry: ProxyHealthConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
-    """Add sensors for every watched proxy, and for proxies added later."""
+    """Add sensors for every watched proxy, and for proxies added later.
+
+    A proxy whose bluetooth config entry has been deleted (the proxy was
+    replaced or retired) loses its sensors. A proxy that is only disconnected
+    keeps its entry, so its sensors stay and read unavailable.
+    """
     coordinator = entry.runtime_data
     known: set[str] = set()
 
     @callback
-    def _add_new() -> None:
+    def _sync() -> None:
+        current = coordinator.proxies()
+        current_sources = {proxy.source for proxy in current}
         new: list[ProxySensor] = []
-        for proxy in coordinator.proxies():
+        for proxy in current:
             if proxy.source in known:
                 continue
             known.add(proxy.source)
@@ -110,9 +117,24 @@ async def async_setup_entry(
             )
         if new:
             async_add_entities(new)
+        known.intersection_update(current_sources)
+        _remove_gone(hass, entry.entry_id, current_sources)
 
-    _add_new()
-    entry.async_on_unload(coordinator.async_add_listener(_add_new))
+    _sync()
+    entry.async_on_unload(coordinator.async_add_listener(_sync))
+
+
+@callback
+def _remove_gone(hass: HomeAssistant, entry_id: str, current: set[str]) -> None:
+    """Remove the sensors of proxies that are no longer watched.
+
+    Unique IDs are "<source>_<key>"; a source is a MAC address, which has no
+    underscore. This also catches proxies removed while Home Assistant was down.
+    """
+    ent_reg = er.async_get(hass)
+    for ent in er.async_entries_for_config_entry(ent_reg, entry_id):
+        if ent.domain == "sensor" and ent.unique_id.split("_", 1)[0] not in current:
+            ent_reg.async_remove(ent.entity_id)
 
 
 class ProxySensor(CoordinatorEntity[ProxyHealthCoordinator], SensorEntity):
